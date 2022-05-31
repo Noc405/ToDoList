@@ -1,0 +1,84 @@
+<div class="main-container">
+  <div class="pd-ltr-20 xs-pd-20-10">
+    <div class="min-height-200px">
+      <div class="page-header">
+        <div class="row">
+          <div class="col-md-12 col-sm-12">
+            <div class="title">
+              <h4>Calendar</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pd-20 card-box mb-30">
+        <div class="calendar-wrap">
+          <div id='calendar'></div>
+        </div>
+        <!-- calendar modal -->
+        <div id="modal-view-event" class="modal modal-top fade calendar-modal">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body">
+                <h4 class="h4"><span class="event-icon weight-400 mr-3"></span><span class="event-title"></span></h4>
+                <div class="event-body"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <form id="add-event" method="" action="index.php?controller=home&action=home">
+                <div class="modal-body">
+                  <h4 class="text-blue h4 mb-10">Ajouter une tâche</h4>
+                  <div class="form-group">
+                    <label>Nom de la tâche</label>
+                    <input type="text" class="form-control" name="name">
+                  </div>
+                  <div class="form-group">
+                    <label>Date</label>
+                    <input type='date' class="form-control" name="date">
+                  </div>
+                  <div class="form-group">
+                    <label>Heure de début</label>
+                    <input type='time' class="form-control hourStart" name="starthour">
+                  </div>
+                  <div class="form-group">
+                    <label>Heure de fin</label>
+                    <input type='time' class="form-control hourEnd" name="endHour">
+                  </div>
+                  <div class="form-group d-flex w-100 justify-content-between">
+                    <label class="align-items-center h-auto">Toute la journée</label>
+                    <input type='checkbox' id="allDay" class="form-control w-25" name="allDay">
+                  </div>
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" name="desc"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Couleur</label>
+                    <select class="form-control" name="color">
+                      <option value="fc-bg-default">fc-bg-default</option>
+                      <option value="fc-bg-blue">fc-bg-blue</option>
+                      <option value="fc-bg-lightgreen">fc-bg-lightgreen</option>
+                      <option value="fc-bg-pinkred">fc-bg-pinkred</option>
+                      <option value="fc-bg-deepskyblue">fc-bg-deepskyblue</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" >Save</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+	<script src="../../../ToDoList/ToDoList/resources/js/custom/custom.js"></script>

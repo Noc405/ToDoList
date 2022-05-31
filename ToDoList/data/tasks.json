@@ -1,0 +1,21 @@
+[
+    {
+        "title": "Barber",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.",
+        "start": "2022-05-05",
+        "end": "2022-05-05",
+        "className": "fc-bg-default",
+        "icon" : "circle",
+        "group" : "allemand",
+        "allDay": true
+    },
+    {
+        "title": "Barber 2",
+        "start": "2022-05-05",
+        "end": "2022-05-07",
+        "className": "fc-bg-default",
+        "icon" : "circle",
+        "group" : "anglais",
+        "allDay": true
+    }
+]

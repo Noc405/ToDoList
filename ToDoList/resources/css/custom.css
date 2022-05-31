@@ -1,0 +1,10 @@
+.allowCookies{
+    display: none;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+
+    transform: translateY(200px);
+    transition: transform 1s;
+}
