@@ -41,10 +41,12 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
         return "";
     }
 
+    console.log(tasks)
+
     //Filter tasks from gorups
     let tasksFiltred = new Array(tasks.length);
+    let tabindex = 0;
     for (let ii = 0; ii < tasks.length; ii++) {
-        let tabindex = 0;
         if(tasks[ii]['group'] == groupName){
             tasksFiltred[tabindex] = tasks[ii]
             tabindex += 1;

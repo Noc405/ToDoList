@@ -15,6 +15,7 @@
     height: 20px;
     border: solid gray 1px;
     border-radius: 50px;
+    cursor: pointer;
 }
 .isChecked{
     background-color: #1b00ff;
@@ -36,4 +37,33 @@
     top: 8px;
     left: -2px;
     transform: rotate(-55deg);
+}
+
+/*Add tasks on the tasks page*/
+.addTask{
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+}
+.crossVertical{
+    position: relative;
+    min-width: 75px;
+    height: 10px;
+    background-color: white;
+    border-radius: 5px;
+    transform: rotate(-90deg);
+    left: -80px;
+}
+.crossHorizontal{
+    position: relative;
+    min-width: 75px;
+    height: 10px;
+    background-color: white;
+    border-radius: 5px;
+    left: -5px;
 }
