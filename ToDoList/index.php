@@ -80,15 +80,14 @@ class MainController {
 
             $content = $currentPage->display();
 
-            include(dirname(__FILE__) . '/view/head.php');
-            include(dirname(__FILE__) . '/view/menu.php');
+            include(dirname(__FILE__) . '/view/head.html');
+            include(dirname(__FILE__) . '/view/menu.html');
             //Show dialog box to allow cookies if the user don't click on
-            if(!isset($_SESSION['allowCookies'])){
-                include(dirname(__FILE__) . '/view/allowCookies.html');
-            }
+            // if(!isset($_SESSION['allowCookies'])){
+            //     include(dirname(__FILE__) . '/view/allowCookies.html');
+            // }
             echo $content;
-            include(dirname(__FILE__) . '/view/footer.php');
-            include(dirname(__FILE__) . '/view/endFile.php');
+            include(dirname(__FILE__) . '/view/footer.html');
     }
 }
 

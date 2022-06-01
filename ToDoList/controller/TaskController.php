@@ -31,9 +31,8 @@ class TaskController extends Controller {
      *
      * @return string
      */
-    private function seeTaskAction() {
-        //Verify that the user have accepted the cookies
-        $view = file_get_contents('view/pages/task/seeTask.html');
+    private function seeGroupTaskAction() {
+        $view = file_get_contents('view/pages/task/seeTaskGroup.html');
 
         ob_start();
         eval('?>' . $view);
@@ -43,12 +42,30 @@ class TaskController extends Controller {
     }
 
     /**
+     * Display the task pages in the groups
+     *
+     * @return string
+     */
+    private function seeTaskAction() {
+        if(isset($_GET['group'])){
+            $view = file_get_contents('view/pages/task/seeTask.html');
+    
+            ob_start();
+            eval('?>' . $view);
+            $content = ob_get_clean();
+    
+            return $content;
+        }else{
+            header("Location:index.php?controller=task&action=seeGroupTask");
+        }
+    }
+
+    /**
      * Display add task action
      *
      * @return string
      */
     private function addTaskAction() {
-        //Verify that the user have accepted the cookies
         $view = file_get_contents('view/pages/home/home.html');
 
         ob_start();
@@ -64,7 +81,6 @@ class TaskController extends Controller {
      * @return string
      */
     private function addGroupAction() {
-        //Verify that the user have accepted the cookies
         $view = file_get_contents('view/pages/home/home.html');
 
         ob_start();

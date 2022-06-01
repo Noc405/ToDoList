@@ -58,4 +58,7 @@ function loadCalender(calenderInfos) {
 	});
 
 };
-loadCalender(calender);
+window.addEventListener('load', () => {
+	loadCalender(calender);
+});
+	
