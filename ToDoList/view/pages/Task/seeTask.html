@@ -8,7 +8,52 @@
 
     <!-- Groupe -->
     <div id="contentPage align-item-left">
-        <div class="contentGroup">
+        <div class="contentTask">
         </div>
     </div>
-	<script src="../../../ToDoList/ToDoList/resources/js/custom/addTaskToPage.js"></script>
+
+    <!-- Modal Description Task -->
+    <div class="modal fade bs-example-modal-lg" id="task-info" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header d-flex">
+                    <div class="taskIcon align-self-center mr-3">
+                        <i class='fa fa-circle'></i>
+                    </div>
+                    <h4 class="modal-title taskTitle" id="myLargeModalLabel"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body taskBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End modal description Task -->
+
+    <!-- Modal Comfirm delete -->
+    <div class="modal fade" id="confirmation-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center font-18">
+                    <h4 class="padding-top-30 mb-30 weight-500">Are you sure you want to continue?</h4>
+                    <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
+                        <div class="col-6">
+                            <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                            NO
+                        </div>
+                        <div class="col-6">
+                            <button type="button" class="btn btn-primary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-check"></i></button>
+                            YES
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End modal confirm delete -->
+
+	<script src="../../../ToDoList/ToDoList/resources/js/custom/addTasksToPage.js"></script>
+	<script src="../../../ToDoList/ToDoList/resources/js/custom/checkTasks.js"></script>

@@ -8,3 +8,32 @@
     transform: translateY(200px);
     transition: transform 1s;
 }
+
+/*Check tasks*/
+.roundedDiv{
+    width: 20px;
+    height: 20px;
+    border: solid gray 1px;
+    border-radius: 50px;
+}
+.isChecked{
+    background-color: #1b00ff;
+}
+.littleCheck{
+    width: 5px;
+    height: 2px;
+    background-color: white;
+    position: relative;
+    top: 10px;
+    left: 2px;
+    transform: rotate(45deg);
+}
+.longCheck{
+    width: 15px;
+    height: 2px;
+    background-color: white;
+    position: relative;
+    top: 8px;
+    left: -2px;
+    transform: rotate(-55deg);
+}
