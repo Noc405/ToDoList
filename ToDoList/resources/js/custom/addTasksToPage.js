@@ -41,8 +41,6 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
         return "";
     }
 
-    console.log(tasks)
-
     //Filter tasks from gorups
     let tasksFiltred = new Array(tasks.length);
     let tabindex = 0;

@@ -1,18 +1,3 @@
-$(document).ready(function(){
-	$("#add-event").submit(function(){
-		var values = {};
-		$.each($('#add-event').serializeArray(), function(i, field) {
-			values[field.name] = field.value;
-		});
-
-		console.log(
-			values
-		);
-
-		alert("Submitted");
-	});
-});
-
 //Variabes in the calender
 var calender = {
 	themeSystem: 'bootstrap4',
@@ -20,7 +5,7 @@ var calender = {
 	businessHours: false,
 	defaultView: 'month',
 	// event dragging & resizing
-	editable: true,
+	editable: false,
 	// header
 	header: {
 		left: 'title',
@@ -28,9 +13,6 @@ var calender = {
 		right: 'today prev,next'
 	},
 	events:[],
-	dayClick: function() {
-		$('#modal-view-event-add').modal();
-	},
 	eventClick: function(event, jsEvent, view) {
 		$('.event-icon').html("<i class='fa fa-"+event.icon+"'></i>");
 		$('.event-title').html(event.title);

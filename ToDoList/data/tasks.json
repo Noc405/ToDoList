@@ -2,20 +2,18 @@
     {
         "title": "Faire exam 2012",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.",
-        "start": "2022-06-05",
-        "end": "2022-06-05",
-        "className": "fc-bg-default",
-        "icon" : "circle",
+        "start": "2022-06-08T08:00",
+        "end": "2022-06-09T21:00",
+        "icon" : "cog",
         "group" : "allemand",
-        "allDay": true
+        "allDay": false
     },
     {
         "title": "Faire exam 2014",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.",
         "start": "2022-06-05",
         "end": "2022-06-05",
-        "className": "fc-bg-default",
-        "icon" : "circle",
+        "icon" : "group",
         "group" : "allemand",
         "allDay": true
     },
@@ -24,8 +22,7 @@
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.",
         "start": "2022-06-05",
         "end": "2022-06-05",
-        "className": "fc-bg-default",
-        "icon" : "circle",
+        "icon" : "suitcase",
         "group" : "allemand",
         "allDay": true
     },
@@ -33,9 +30,8 @@
         "title": "Wb page 33",
         "start": "2022-06-05",
         "end": "2022-06-07",
-        "className": "fc-bg-default",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eu pellentesque nibh. In nisl nulla, convallis ac nulla eget, pellentesque pellentesque magna.",
-        "icon" : "circle",
+        "icon" : "calendar",
         "group" : "anglais",
         "allDay": true
     }
