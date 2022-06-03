@@ -11,11 +11,11 @@ window.addEventListener('load', () => {
             littleCross[i].classList.toggle('show')
         });
     });
-})
 
-//See the modal for add a task
-$('#btnAddTask').click(function () {
-    $('#add-task-modal').modal();
+    //See the modal for add a task
+    $('#btnAddTask').click(function () {
+        $('#add-task-modal').modal();
+    });
 })
 
 //Get the values of the modal
@@ -37,6 +37,9 @@ $(document).ready(function(){
                 if(result.success == 1){
                     //Hide the form
                     $("#add-task-modal").modal('hide');
+
+                    //Reload
+                    window.location.reload();
                 }else{
                     let error = document.querySelector('.alertMessage');
                     error.classList.add('show');
@@ -48,7 +51,7 @@ $(document).ready(function(){
             }
         }
         
-        xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/importJson.php", true);
+        xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/importJsonTasks.php", true);
 
         //Get the group of the task for send it
         let groupName;
@@ -59,9 +62,6 @@ $(document).ready(function(){
 
         responseType = 'json';
         xhr.send(data);
-
-        //Reload
-        window.location.reload();
 
         return false;
 	});

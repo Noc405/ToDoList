@@ -1,14 +1,1 @@
-[
-    {
-        "name": "Taches",
-        "color": "purple"
-    },
-    {
-        "name": "allemand",
-        "color": "blue"
-    },
-    {
-        "name": "anglais",
-        "color": "green"
-    }
-]
+[{"name":"Taches","color":"purple"},{"name":"allemand","color":"blue"},{"name":"anglais","color":"green"}]

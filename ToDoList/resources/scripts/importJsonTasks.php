@@ -1,6 +1,6 @@
 <?php
     $success = 1;
-    $msg = "Le fichier a éàté mis a jour";
+    $msg = "Le fichier a été mis a jour";
     
     if(isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['date']) && !empty($_POST['date'])){
         //Get the value from the json file of the tasks

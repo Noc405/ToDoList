@@ -42,7 +42,7 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
     }
 
     //Filter tasks from gorups
-    let tasksFiltred = new Array(tasks.length);
+    let tasksFiltred = new Array();
     let tabindex = 0;
     for (let ii = 0; ii < tasks.length; ii++) {
         if(tasks[ii]['group'] == groupName){
@@ -51,7 +51,9 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
         }
     }
 
-    if(tasks.length > 0){
+    console.log(tasksFiltred.length)
+    if(tasksFiltred.length > 0){
+        let contentPage = document.querySelector('.contentPage');
         let contentGroup = document.querySelector('.contentTask');
         //Delete all the elements in the div
         contentGroup.innerHTML = "";
@@ -88,9 +90,25 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
                 });
             })
         });
+
+        contentPage.innerHTML += `
+        <button type="button" class="btn btn-success mt-3">Terminer les tâches cochées</button>
+        <button type="button" id="btnAddTask" class="btn btn-info addTask">
+            <div class="crossHorizontal"></div>
+            <div class="crossVertical"></div>
+        </button>
+        `;
         
     }else{
+        let contentGroup = document.querySelector('.contentTask');
 
+        contentGroup.innerHTML = `
+        <div class="d-flex w-100 justify-content-around">
+            <div class="text-center">
+                <p>Il n'y a pas de tâches dans ce groupe</p>
+            </div>
+        </div>
+        `;
     }
 
 });
