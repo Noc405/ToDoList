@@ -76,7 +76,7 @@
     
         $newJsonArray = json_encode($jsonArray);
     
-        file_put_contents('../../../../ToDoList/ToDoList/data/tasks.json', $newJsonArray);
+        file_put_contents(`/ToDoList/ToDoList/data/tasks.json`, $newJsonArray);
     
     }else{
         $success = 0;

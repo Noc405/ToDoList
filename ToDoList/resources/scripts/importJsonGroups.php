@@ -18,7 +18,7 @@
     
         $newJsonArray = json_encode($jsonArray);
     
-        file_put_contents('../../../../ToDoList/ToDoList/data/group.json', $newJsonArray);
+        file_put_contents('/ToDoList/ToDoList/data/group.json', $newJsonArray);
     
     }else{
         $success = 0;
@@ -26,5 +26,5 @@
     }
 
     $result = ["success" => $success, "message" => $msg];
-    echo json_encode($result);
+    print_r($result);
 ?>

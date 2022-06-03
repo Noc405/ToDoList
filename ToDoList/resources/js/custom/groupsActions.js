@@ -18,6 +18,7 @@ $(document).ready(function(){
             if(this.readyState == 4 && this.status == 200){
                 //Get the result and set it to json
                 var jsonResult = this.response;
+                console.log(jsonResult)
                 var result = JSON.parse(jsonResult);
                 //reload the page if the result is 1
                 if(result.success == 1){
@@ -38,7 +39,7 @@ $(document).ready(function(){
         }
         
         xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/importJsonGroups.php", true);
-        responseType = 'json';
+        // responseType = 'json';
         xhr.send(data);
 
         return false;

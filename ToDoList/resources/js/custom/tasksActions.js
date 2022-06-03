@@ -3,19 +3,45 @@ window.addEventListener('load', () => {
     let check = document.querySelectorAll('.roundedDiv');
     let longCross = document.querySelectorAll('.longCheck');
     let littleCross = document.querySelectorAll('.littleCheck');
+    var taskId = new Array();
 
     check.forEach((element, i) => {        
         element.addEventListener('click', () => {
-            // //Get the card div that is checked
-            // let round = element.parentNode;
-            // let header = round.parentNode;
-            // let card = header.parentNode;
-            // card.parentNode.removeChild(card);
             //Show the check
             element.classList.toggle('isChecked');
             longCross[i].classList.toggle('show');
             littleCross[i].classList.toggle('show');
         });
+    });
+
+    $('#finishTasks').click(function () {
+        $('.isChecked').each(function(i) {
+            //Get the card div that is checked
+            let round = $(this).parent();
+            let header = round.parent();
+            let card = header.parent();
+            taskId[i] = card.attr('id');
+            card.remove();
+        });
+
+        if(taskId.length > 0){
+            //Transfert data to php
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if(this.readyState == 4 && this.status == 200){
+                    console.log(this.response);
+                }else if(this.readyState == 4){
+                    alert("Erreur lors de la requête : HTTP ERROR " + this.status);
+                }
+            }
+            
+            xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/finishJsonTasks.php", true);;
+            xhr.setRequestHeader( "Content-Type", "application/json" );
+            // responseType = 'json';
+            xhr.send(JSON.stringify(taskId));
+        }
+
     });
 
     //See the modal for add a task
@@ -53,7 +79,7 @@ $(document).ready(function(){
                 }
             }else if(this.readyState == 4){
                 console.log(this.response);
-                alert("erreur lors de l'execution de la requête")
+                alert("Erreur lors de la requête : HTTP ERROR " + this.status)
             }
         }
         

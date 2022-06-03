@@ -46,8 +46,10 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
     let tabindex = 0;
     for (let ii = 0; ii < tasks.length; ii++) {
         if(tasks[ii]['group'] == groupName){
-            tasksFiltred[tabindex] = tasks[ii]
-            tabindex += 1;
+            if(tasks[ii]['finish'] == false){
+                tasksFiltred[tabindex] = tasks[ii]
+                tabindex += 1;
+            }
         }
     }
 
@@ -91,7 +93,7 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
         });
 
         contentPage.innerHTML += `
-        <button type="button" class="btn btn-success mt-3">Terminer les tâches cochées</button>
+        <button type="button" class="btn btn-success mt-3" id="finishTasks">Terminer les tâches cochées</button>
         <button type="button" id="btnAddTask" class="btn btn-info addTask">
             <div class="crossHorizontal"></div>
             <div class="crossVertical"></div>
