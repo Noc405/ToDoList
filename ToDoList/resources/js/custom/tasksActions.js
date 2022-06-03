@@ -1,10 +1,14 @@
 window.addEventListener('load', () => {
     //Check the tasks
     let check = document.querySelectorAll('.roundedDiv');
+    let longCross = document.querySelectorAll('.longCheck');
+    let littleCross = document.querySelectorAll('.littleCheck');
 
-    check.forEach(element => {        
+    check.forEach((element, i) => {        
         element.addEventListener('click', () => {
-            element.classList.toggle('isChecked')
+            element.classList.toggle('isChecked');
+            longCross[i].classList.toggle('show')
+            littleCross[i].classList.toggle('show')
         });
     });
 })
@@ -16,145 +20,52 @@ $('#btnAddTask').click(function () {
 
 //Get the values of the modal
 $(document).ready(function(){
-	$("#add-task").submit(function(){
-		var values = {};
-		$.each($('#add-task').serializeArray(), function(i, field) {
-			values[field.name] = field.value;
-		});
+	$("#add-task").submit(function(e){
+        //Don't refresh the page
+        e.preventDefault();
 
-        let donnees = new Array()
-        donnees = setDonnees(values);
-        console.log(donnees)
-
-		alert("Submitted");
-	});
-});
-
-function setDonnees(valuesFromForm) {
-    //check that the user enter the values
-    if(valuesFromForm['name'] != '' && valuesFromForm['date'] != ''){
-        let values = new Array();
-        //Set the tilte
-        values['title'] = valuesFromForm['name'];
-        //Set the description
-        values['description'] = valuesFromForm['desc'];
-
-        //Set the dates
-        let dates = valuesFromForm['date'].split(' - ');
-        //If the user select one date
-        if(dates.length == 1){
-            let separateDate = dates[0].split('/');
-            let ordredDate = new Array
-            if(valuesFromForm['allDay'] == "on"){
-                //If the user don't set the time
-                ordredDate['startDate'] = separateDate[2] + "-" + separateDate[0] + "-" + separateDate[1];
-                ordredDate['endDate'] = ordredDate['startDate'];
-            }else{
-                //if the user set the time
-                let ordredHour = new Array();
-
-                ordredHour = orderHour(valuesFromForm);
-
-                //Set the date
-                ordredDate['startDate'] = separateDate[2] + "-" + separateDate[0] + "-" + separateDate[1];
-                ordredDate['endDate'] = ordredDate['startDate'];
-
-                //Add the hour
-                ordredDate['startDate'] += "T" + ordredHour['startHour'];
-                ordredDate['endDate'] += "T" + ordredHour['endHour']
+        var data = new FormData(this)
+        //Transfert data to php
+        var xhr = new XMLHttpRequest();
+        
+        xhr.onreadystatechange = function () {
+            if(this.readyState == 4 && this.status == 200){
+                //Get the result and set it to json
+                var jsonResult = this.response;
+                var result = JSON.parse(jsonResult);
+                //reload the page if the result is 1
+                if(result.success == 1){
+                    //Hide the form
+                    $("#add-task-modal").modal('hide');
+                }else{
+                    let error = document.querySelector('.alertMessage');
+                    error.classList.add('show');
+                    error.innerHTML = result.message
+                }
+            }else if(this.readyState == 4){
+                console.log(this.response);
+                alert("erreur lors de l'execution de la requête")
             }
-
-            values['start'] = ordredDate['startDate'];
-            values['end'] = ordredDate['endDate'];
         }
-        //If the user select two dates
-        else if (dates.length == 2) {
-            let separateDateStart = dates[0].split('/');
-            let separateDateEnd = dates[1].split('/');
-            let ordredDate = new Array
-            if(valuesFromForm['allDay'] == "on"){
-                //If the user don't set the time
-                ordredDate['startDate'] = separateDateStart[2] + "-" + separateDateStart[0] + "-" + separateDateStart[1];
-                ordredDate['endDate'] = separateDateEnd[2] + "-" + separateDateEnd[0] + "-" + separateDateEnd[1];
-            }else{
-                //if the user set the time
-                let ordredHour = new Array();
+        
+        xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/importJson.php", true);
 
-                ordredHour = orderHour(valuesFromForm);
-
-                //Set the date
-                ordredDate['startDate'] = separateDateStart[2] + "-" + separateDateStart[0] + "-" + separateDateStart[1];
-                ordredDate['endDate'] = separateDateEnd[2] + "-" + separateDateEnd[0] + "-" + separateDateEnd[1];
-
-                //Add the hour
-                ordredDate['startDate'] += "T" + ordredHour['startHour'];
-                ordredDate['endDate'] += "T" + ordredHour['endHour']
-            }
-
-            values['start'] = ordredDate['startDate'];
-            values['end'] = ordredDate['endDate'];
-        }
-
-        //Set the icon
-        values['icon'] = valuesFromForm['icon'];
-        //Set the group
-        //Get the url
-        var URLvalues = new Array();
+        //Get the group of the task for send it
         let groupName;
         URLvalues = orderSearch();
         groupName = GetGroupName(URLvalues);
-        //Set the array
-        values['group'] = groupName;
-        //Set the all Day
-        if(valuesFromForm['allDay'] == "on"){
-            values['allDay'] = true;
-        }else{
-            values['allDay'] = false;
-        }
 
-        return values
-    }else{
-        return 'error';
-    }
-}
+        data.append("group", groupName);
 
-function orderHour(valuesFromForm) {
-    let ordredHour = new Array();
+        responseType = 'json';
+        xhr.send(data);
 
-    //Remove the "am" and the "pm" from the start hour
-    let separateStartHour = valuesFromForm['starthour'].split(' ');
-    if (separateStartHour[1] == "pm"){
-        let separateStartHourMinuts = separateStartHour[0].split(':');
-        let parsedHourStart = parseInt(separateStartHourMinuts[0]);
-        let startHour = parsedHourStart + 12;
-        let startMinuts = separateStartHourMinuts[1];
-        ordredHour['startHour'] = startHour + ":" + startMinuts;
-    }else{
-        if(parseInt(separateStartHour[0]) < 10){
-            ordredHour['startHour'] = "0" + separateStartHour[0];
-        }else{
-            ordredHour['startHour'] = separateStartHour[0];
-        }
-    }
+        //Reload
+        window.location.reload();
 
-    //Remove the "am" and the "pm" from the end hour
-    let separateEndHour = valuesFromForm['endhour'].split(' ');
-    if (separateEndHour[1] == "pm"){
-        let separateEndHourMinuts = separateEndHour[0].split(':');
-        let parsedHourEnd = parseInt(separateEndHourMinuts[0]);
-        let endHour = parsedHourEnd + 12;
-        let endMinuts = separateEndHourMinuts[1];
-        ordredHour['endHour'] = endHour + ":" + endMinuts;
-    }else{
-        if(parseInt(separateEndHour[0]) > 10){
-            ordredHour['endHour'] = "0" + separateEndHour[0];
-        }else{
-            ordredHour['endHour'] = separateEndHour[0];
-        }
-    }
-
-    return ordredHour;
-}
+        return false;
+	});
+});
 
 function orderSearch() {        
     let searchUrl = window.location.search;
@@ -164,7 +75,7 @@ function orderSearch() {
     //(ex: gets vaut : [controller=home], [action=home])
     var gets = search.split('&');
     var values = new Array();
-
+    
     //Get the values and the name in an array 
     //(ex: si "element" égal : "controller=home", l'index [0] va valoir "controller" et l'index [1] va valoir "home")
     gets.forEach(element => {
@@ -185,6 +96,3 @@ function GetGroupName(valuesOfGet) {
     }
     return "";
 }
-
-// //Reload
-//window.location.reload();

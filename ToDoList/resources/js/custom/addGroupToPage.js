@@ -7,7 +7,9 @@ $.get("../../../ToDoList/ToDoList/data/group.json", function(data) {
 
     if(groups.length > 0){
         let contentGroup = document.querySelector('.contentGroup');
-
+        //Delte the content of the div
+        contentGroup.innerHTML = "";
+        //Show the elemtents in the div
         groups.forEach(element => {
             contentGroup.innerHTML += `
             <div class="card">

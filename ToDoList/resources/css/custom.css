@@ -21,6 +21,7 @@
     background-color: #1b00ff;
 }
 .littleCheck{
+    display: none;
     width: 5px;
     height: 3px;
     background-color: white;
@@ -30,6 +31,7 @@
     transform: rotate(45deg);
 }
 .longCheck{
+    display: none;
     width: 15px;
     height: 3px;
     background-color: white;
@@ -66,4 +68,10 @@
     background-color: white;
     border-radius: 5px;
     left: -5px;
+}
+.alertMessage{
+    display: none;
+}
+.show{
+    display: block !important;
 }

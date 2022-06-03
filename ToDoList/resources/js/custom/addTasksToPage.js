@@ -53,7 +53,9 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
 
     if(tasks.length > 0){
         let contentGroup = document.querySelector('.contentTask');
-
+        //Delete all the elements in the div
+        contentGroup.innerHTML = "";
+        //Show the elements
         tasksFiltred.forEach(element => {
             contentGroup.innerHTML += `
             <div class="card">
