@@ -51,7 +51,6 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
         }
     }
 
-    console.log(tasksFiltred.length)
     if(tasksFiltred.length > 0){
         let contentPage = document.querySelector('.contentPage');
         let contentGroup = document.querySelector('.contentTask');
@@ -60,7 +59,7 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
         //Show the elements
         tasksFiltred.forEach(element => {
             contentGroup.innerHTML += `
-            <div class="card">
+            <div class="card" id="${element['id']}">
                 <div class="card-header d-flex">
                     <div class="round d-flex align-self-center">
                         <div class="roundedDiv d-flex">

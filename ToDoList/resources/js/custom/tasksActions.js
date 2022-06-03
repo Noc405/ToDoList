@@ -6,9 +6,15 @@ window.addEventListener('load', () => {
 
     check.forEach((element, i) => {        
         element.addEventListener('click', () => {
+            // //Get the card div that is checked
+            // let round = element.parentNode;
+            // let header = round.parentNode;
+            // let card = header.parentNode;
+            // card.parentNode.removeChild(card);
+            //Show the check
             element.classList.toggle('isChecked');
-            longCross[i].classList.toggle('show')
-            littleCross[i].classList.toggle('show')
+            longCross[i].classList.toggle('show');
+            littleCross[i].classList.toggle('show');
         });
     });
 

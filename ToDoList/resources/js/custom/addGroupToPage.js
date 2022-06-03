@@ -33,24 +33,3 @@ $.get("../../../ToDoList/ToDoList/data/group.json", function(data) {
 
     }
 });
-
-//Filter groups
-// let groupsFiltred = new Array(groups.length);
-// for (let ii = 0; ii < groups.length; ii++) {
-//     let tabindex = 0;
-//     if(groups[ii]['name'] == "anglais"){
-//         groupsFiltred[tabindex] = groups[ii]
-//         tabindex += 1;
-//     }
-// }
-
-//Add an event click on the loaded ressources
-// window.addEventListener('load', () => {
-
-//     document.querySelectorAll('.card').forEach(element => {
-//         element.addEventListener('click', () =>{        
-//             //Go to the tasks
-//             console.log('click')
-//         });
-//     });
-// })
