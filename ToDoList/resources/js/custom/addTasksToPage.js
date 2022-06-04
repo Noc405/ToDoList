@@ -184,7 +184,12 @@ function AddEventOnTasks() {
     let buttonFinishedTasks = document.querySelector('.linkFinishTasks');
     // Rotate the angle when click on fonished tasks
     buttonFinishedTasks.addEventListener('click', () => {
-        angle.classList.toggle('fa-angle-down');
-        angle.classList.toggle('fa-angle-up');
+        if(document.querySelector('.collapse ').classList.contains('show')){
+            angle.classList.remove('fa-angle-up');
+            angle.classList.add('fa-angle-down');
+        }else{
+            angle.classList.remove('fa-angle-down');
+            angle.classList.add('fa-angle-up');
+        }
     });
 }
