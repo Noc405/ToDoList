@@ -75,8 +75,7 @@ function LaodTaskPage() {
                     <div class="card-header d-flex">
                         <div class="round d-flex align-self-center">
                             <div class="roundedDiv d-flex">
-                                <div class="littleCheck"></div>
-                                <div class="longCheck"></div>
+                                <i class="icon-copy fa fa-check checkIcon" aria-hidden="true"></i>
                             </div>
                         </div>
                         <button href="#" class="btn btn-block text-left taskName">
@@ -110,8 +109,7 @@ function LaodTaskPage() {
                             <div class="card-header d-flex">
                                 <div class="round d-flex align-self-center">
                                     <div class="roundedDiv isChecked terminated d-flex">
-                                        <div class="littleCheck show"></div>
-                                        <div class="longCheck show"></div>
+                                        <i class="icon-copy fa fa-check checkIcon show" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <button href="#" class="btn btn-block text-left taskFinishName">

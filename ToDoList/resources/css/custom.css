@@ -20,25 +20,12 @@
 .isChecked{
     background-color: #1b00ff;
 }
-.littleCheck{
+.checkIcon{
     display: none;
-    width: 5px;
-    height: 3px;
-    background-color: white;
+    color: white;
     position: relative;
-    top: 10px;
-    left: 2px;
-    transform: rotate(45deg);
-}
-.longCheck{
-    display: none;
-    width: 15px;
-    height: 3px;
-    background-color: white;
-    position: relative;
-    top: 8px;
-    left: -2px;
-    transform: rotate(-55deg);
+    top: 1px;
+    left: 1px;
 }
 
 /*Add tasks on the tasks page*/

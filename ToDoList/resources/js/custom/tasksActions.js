@@ -1,8 +1,7 @@
 window.addEventListener('load', () => {
     //Check the tasks
     let check = document.querySelectorAll('.roundedDiv');
-    let longCross = document.querySelectorAll('.longCheck');
-    let littleCross = document.querySelectorAll('.littleCheck');
+    let checkIcon = document.querySelectorAll('.checkIcon');
     var taskId = new Array();
 
     //See the modal for add a task information
@@ -43,11 +42,9 @@ window.addEventListener('load', () => {
                 //Show the check
                 element.classList.toggle('isChecked');
                 if(element.classList.contains('isChecked')){
-                    longCross[i].classList.add('show');
-                    littleCross[i].classList.add('show');
+                    checkIcon[i].classList.add('show');
                 }else{
-                    longCross[i].classList.remove('show');
-                    littleCross[i].classList.remove('show');
+                    checkIcon[i].classList.remove('show');
                 }
             }
         });
