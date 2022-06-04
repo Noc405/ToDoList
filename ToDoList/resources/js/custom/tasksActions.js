@@ -7,10 +7,41 @@ window.addEventListener('load', () => {
 
     check.forEach((element, i) => {        
         element.addEventListener('click', () => {
-            //Show the check
-            element.classList.toggle('isChecked');
-            longCross[i].classList.toggle('show');
-            littleCross[i].classList.toggle('show');
+            if(element.classList.contains('terminated')){
+                //Get the id that the div is checked
+                let round = $(element).parent();
+                let header = round.parent();
+                let card = header.parent();
+                let task = card.attr('id');
+
+                //Transfert data to php
+                var xhr = new XMLHttpRequest();
+
+                xhr.onreadystatechange = function () {
+                    if(this.readyState == 4 && this.status == 200){
+                        // Reload the page
+                        // LaodTaskPage();
+                        window.location.reload();
+                    }else if(this.readyState == 4){
+                        alert("Erreur lors de la requête : HTTP ERROR " + this.status);
+                    }
+                }
+                
+                xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/endFinishJsonTasks.php", true);;
+                xhr.setRequestHeader( "Content-Type", "application/json" );
+                // responseType = 'json';
+                xhr.send(JSON.stringify(task));
+            }else{
+                //Show the check
+                element.classList.toggle('isChecked');
+                if(element.classList.contains('isChecked')){
+                    longCross[i].classList.add('show');
+                    littleCross[i].classList.add('show');
+                }else{
+                    longCross[i].classList.remove('show');
+                    littleCross[i].classList.remove('show');
+                }
+            }
         });
     });
 
@@ -21,7 +52,7 @@ window.addEventListener('load', () => {
             let header = round.parent();
             let card = header.parent();
             taskId[i] = card.attr('id');
-            card.remove();
+            // card.remove();
         });
 
         if(taskId.length > 0){
@@ -30,11 +61,8 @@ window.addEventListener('load', () => {
 
             xhr.onreadystatechange = function () {
                 if(this.readyState == 4 && this.status == 200){
-                    // let htmlLink = document.querySelector('.linkFinishTasks').innerHTML;
-                    // let htmlLinkSeparated = htmlLink.split(" : ");
-                    // let newTerminateTasks = parseInt(htmlLinkSeparated[1]) + taskId.length;
-
-                    // document.querySelector('.linkFinishTasks').innerHTML = `Terminées : ${newTerminateTasks}`;
+                    // Reload the page
+                    // LaodTaskPage();
                     window.location.reload();
                 }else if(this.readyState == 4){
                     alert("Erreur lors de la requête : HTTP ERROR " + this.status);
@@ -43,7 +71,7 @@ window.addEventListener('load', () => {
             
             xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/finishJsonTasks.php", true);;
             xhr.setRequestHeader( "Content-Type", "application/json" );
-            // responseType = 'json';
+            responseType = 'json';
             xhr.send(JSON.stringify(taskId));
         }
 
