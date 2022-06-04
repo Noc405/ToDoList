@@ -1,3 +1,6 @@
+var tasksFiltred = new Array();
+let tasksFinish = new Array();
+
 function LaodTaskPage() {
     $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
         let tasks = new Array(data.length)
@@ -43,14 +46,12 @@ function LaodTaskPage() {
         }
 
         //Filter tasks from gorups
-        let tasksFiltred = new Array();
-        let tasksFinish = new Array();
         let tabindex = 0;
         let numberTasksFinish = 0;
         for (let ii = 0; ii < tasks.length; ii++) {
             if(tasks[ii]['group'] == groupName){
                 if(tasks[ii]['finish'] == false){
-                    tasksFiltred[tabindex] = tasks[ii]
+                    tasksFiltred[tabindex] = tasks[ii];
                     tabindex += 1;
                 } else {
                     tasksFinish[numberTasksFinish] = tasks[ii];
@@ -81,7 +82,7 @@ function LaodTaskPage() {
                         <button href="#" class="btn btn-block text-left taskName">
                             ${element.title}
                         </button>
-                        <a href="#" class="d-flex" data-toggle="modal" data-target="#confirmation-modal" type="button">
+                        <a href="#" class="d-flex deleteButton" data-toggle="modal" data-target="#confirmation-modal" type="button">
                             <span class="icon-copy dw dw-delete-3 row align-self-center"></span>
                         </a>
                     </div>
@@ -116,7 +117,7 @@ function LaodTaskPage() {
                                 <button href="#" class="btn btn-block text-left taskFinishName">
                                     ${element['title']}
                                 </button>
-                                <a href="#" class="d-flex" data-toggle="modal" data-target="#confirmation-modal" type="button">
+                                <a href="#" class="d-flex deleteButton" data-toggle="modal" data-target="#confirmation-modal" type="button">
                                     <span class="icon-copy dw dw-delete-3 row align-self-center"></span>
                                 </a>
                             </div>
@@ -153,6 +154,10 @@ function LaodTaskPage() {
                     <p>Il n'y a pas de tâches dans ce groupe</p>
                 </div>
             </div>
+            <button type="button" id="btnAddTask" class="btn btn-info addTask">
+                <div class="crossHorizontal"></div>
+                <div class="crossVertical"></div>
+            </button>
             `;
         }
 
@@ -169,6 +174,7 @@ function AddEventOnTasks() {
             $('.taskTitle').html(tasksFiltred[ii].title);
             $('.taskBody').html(tasksFiltred[ii].description);
             $('#task-info').modal();
+            console.log('click')
         });
     });
     // Show the informations of the finished task
@@ -184,12 +190,14 @@ function AddEventOnTasks() {
     let buttonFinishedTasks = document.querySelector('.linkFinishTasks');
     // Rotate the angle when click on fonished tasks
     buttonFinishedTasks.addEventListener('click', () => {
-        if(document.querySelector('.collapse ').classList.contains('show')){
-            angle.classList.remove('fa-angle-up');
-            angle.classList.add('fa-angle-down');
-        }else{
-            angle.classList.remove('fa-angle-down');
-            angle.classList.add('fa-angle-up');
+        if(document.querySelector('.collapse')){
+            if(document.querySelector('.collapse ').classList.contains('show')){
+                angle.classList.remove('fa-angle-up');
+                angle.classList.add('fa-angle-down');
+            }else{
+                angle.classList.remove('fa-angle-down');
+                angle.classList.add('fa-angle-up');
+            }
         }
     });
 }

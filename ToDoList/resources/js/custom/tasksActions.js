@@ -5,6 +5,14 @@ window.addEventListener('load', () => {
     let littleCross = document.querySelectorAll('.littleCheck');
     var taskId = new Array();
 
+    //See the modal for add a task information
+    $('#btnAddTask').click(function () {
+        $('#add-task-modal').modal();
+    });
+
+    // Check the tasks
+    // If the task is finish, remove it from finish and add it to in course
+    // If the task is in course, check it
     check.forEach((element, i) => {        
         element.addEventListener('click', () => {
             if(element.classList.contains('terminated')){
@@ -29,7 +37,7 @@ window.addEventListener('load', () => {
                 
                 xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/endFinishJsonTasks.php", true);;
                 xhr.setRequestHeader( "Content-Type", "application/json" );
-                // responseType = 'json';
+                responseType = 'json';
                 xhr.send(JSON.stringify(task));
             }else{
                 //Show the check
@@ -45,6 +53,7 @@ window.addEventListener('load', () => {
         });
     });
 
+    //click on the finish task button
     $('#finishTasks').click(function () {
         $('.isChecked').each(function(i) {
             //Get the card div that is checked
@@ -52,7 +61,6 @@ window.addEventListener('load', () => {
             let header = round.parent();
             let card = header.parent();
             taskId[i] = card.attr('id');
-            // card.remove();
         });
 
         if(taskId.length > 0){
@@ -76,16 +84,9 @@ window.addEventListener('load', () => {
         }
 
     });
-
-    //See the modal for add a task
-    $('#btnAddTask').click(function () {
-        $('#add-task-modal').modal();
-    });
-})
-
-//Get the values of the modal
-$(document).ready(function(){
-	$("#add-task").submit(function(e){
+    
+    //Get the values of the modal for add a task
+    $("#add-task").submit(function(e){
         //Don't refresh the page
         e.preventDefault();
 
@@ -127,10 +128,39 @@ $(document).ready(function(){
 
         responseType = 'json';
         xhr.send(data);
+    });
 
-        return false;
-	});
-});
+    $('.deleteButton').click(function(){
+        let header = $(this).parent();
+        let card = header.parent();
+        let deleteTaskId = card.attr('id');
+
+        //if the form is submit (user confirm delete), remove the task
+        $("#confirmation-modal").submit(function(e){
+            //Don't refresh the page
+            e.preventDefault();
+
+            //Transfert data to php
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if(this.readyState == 4 && this.status == 200){
+                    // Reload the page
+                    // LaodTaskPage();
+                    window.location.reload();
+                }else if(this.readyState == 4){
+                    alert("Erreur lors de la requête : HTTP ERROR " + this.status);
+                }
+            }
+            
+            xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/deleteJsonTasks.php", true);;
+            xhr.setRequestHeader( "Content-Type", "application/json" );
+            responseType = 'json';
+            xhr.send(JSON.stringify(deleteTaskId));
+        });
+    });
+})
+
 
 function orderSearch() {        
     let searchUrl = window.location.search;
