@@ -30,11 +30,12 @@ window.addEventListener('load', () => {
 
             xhr.onreadystatechange = function () {
                 if(this.readyState == 4 && this.status == 200){
-                    let htmlLink = document.querySelector('.linkFinishTasks').innerHTML;
-                    let htmlLinkSeparated = htmlLink.split(" : ");
-                    let newTerminateTasks = parseInt(htmlLinkSeparated[1]) + taskId.length;
+                    // let htmlLink = document.querySelector('.linkFinishTasks').innerHTML;
+                    // let htmlLinkSeparated = htmlLink.split(" : ");
+                    // let newTerminateTasks = parseInt(htmlLinkSeparated[1]) + taskId.length;
 
-                    document.querySelector('.linkFinishTasks').innerHTML = `Terminées : ${newTerminateTasks}`;
+                    // document.querySelector('.linkFinishTasks').innerHTML = `Terminées : ${newTerminateTasks}`;
+                    window.location.reload();
                 }else if(this.readyState == 4){
                     alert("Erreur lors de la requête : HTTP ERROR " + this.status);
                 }

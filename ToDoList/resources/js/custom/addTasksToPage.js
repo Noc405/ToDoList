@@ -43,6 +43,7 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
 
     //Filter tasks from gorups
     let tasksFiltred = new Array();
+    let tasksFinish = new Array();
     let tabindex = 0;
     let numberTasksFinish = 0;
     for (let ii = 0; ii < tasks.length; ii++) {
@@ -51,6 +52,7 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
                 tasksFiltred[tabindex] = tasks[ii]
                 tabindex += 1;
             } else {
+                tasksFinish[numberTasksFinish] = tasks[ii];
                 numberTasksFinish += 1;
             }
         }
@@ -72,7 +74,7 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
                             <div class="longCheck"></div>
                         </div>
                     </div>
-                    <button id="groupName" href="#" class="btn btn-block text-left">
+                    <button href="#" class="btn btn-block text-left taskName">
                         ${element.title}
                     </button>
                     <a href="#" class="d-flex" data-toggle="modal" data-target="#confirmation-modal" type="button">
@@ -82,28 +84,72 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
             </div>
             `;
 
-            // Add an event click on the loaded ressources
-            window.addEventListener('load', () => {
-                document.querySelectorAll('#groupName').forEach((task, ii) => {
-                    task.addEventListener('click', () =>{        
-                        $('.taskIcon').html("<i class='fa fa-"+tasksFiltred[ii].icon+"'></i>");
-                        $('.taskTitle').html(tasksFiltred[ii].title);
-                        $('.taskBody').html(tasksFiltred[ii].description);
-                        $('#task-info').modal();
-                    });
-                });
-            })
+        });
+
+        //Add the terminated tasks
+        contentPage.innerHTML += `
+        <div id="accordion"></div>
+        <div class="mt-3">
+            <div>
+                <button class="btn btn-block linkFinishTasks" data-toggle="collapse" data-target="#terminedTasks">
+                    <i class="fa fa-angle-down" aria-hidden="true"></i> Terminées : ${numberTasksFinish}
+                </button>
+            </div>
+        `;
+
+        tasksFinish.forEach(element => {
+            contentPage.innerHTML += `
+            <div id="terminedTasks" class="collapse" data-parent="#accordion">
+                <div class="terminadedTasksContent">
+                    <div class="card" id="${element['id']}">
+                        <div class="card-header d-flex">
+                            <button href="#" class="btn btn-block text-left taskFinishName">
+                                ${element['title']}
+                            </button>
+                            <a href="#" class="d-flex" data-toggle="modal" data-target="#confirmation-modal" type="button">
+                                <span class="icon-copy dw dw-delete-3 row align-self-center"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
         });
 
         contentPage.innerHTML += `
-        <p class="mt-3"><a class="linkFinishTasks" href="#"><i class="fa fa-angle-down" aria-hidden="true"></i> Terminées : ${numberTasksFinish}</a></p>
+            </div>
+        </div>
+        `;
+
+        //Add the two buttons
+        contentPage.innerHTML += `
         <button type="button" class="btn btn-success mt-3" id="finishTasks">Terminer les tâches cochées</button>
         <button type="button" id="btnAddTask" class="btn btn-info addTask">
             <div class="crossHorizontal"></div>
             <div class="crossVertical"></div>
         </button>
         `;
-        
+
+        // Add an event click on the loaded ressources
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.taskName').forEach((task, ii) => {
+                task.addEventListener('click', () =>{        
+                    $('.taskIcon').html("<i class='fa fa-"+tasksFiltred[ii].icon+"'></i>");
+                    $('.taskTitle').html(tasksFiltred[ii].title);
+                    $('.taskBody').html(tasksFiltred[ii].description);
+                    $('#task-info').modal();
+                });
+            });
+            document.querySelectorAll('.taskFinishName').forEach((task, ii) => {
+                task.addEventListener('click', () =>{        
+                    console.log(tasksFinish)
+                    $('.taskIcon').html("<i class='fa fa-"+tasksFinish[ii].icon+"'></i>");
+                    $('.taskTitle').html(tasksFinish[ii].title);
+                    $('.taskBody').html(tasksFinish[ii].description);
+                    $('#task-info').modal();
+                });
+            });
+        })
     }else{
         let contentGroup = document.querySelector('.contentTask');
 
