@@ -79,7 +79,7 @@ function LaodTaskPage() {
                             </div>
                         </div>
                         <button href="#" class="btn btn-block text-left taskName">
-                            ${element.title}
+                            <span class="taskDate text-muted">${element['start']} - ${element['end']}</span> | ${element.title}
                         </button>
                         <a href="#" class="d-flex deleteButton" data-toggle="modal" data-target="#confirmation-modal" type="button">
                             <span class="icon-copy dw dw-delete-3 row align-self-center"></span>
@@ -113,7 +113,7 @@ function LaodTaskPage() {
                                     </div>
                                 </div>
                                 <button href="#" class="btn btn-block text-left taskFinishName">
-                                    ${element['title']}
+                                <span class="taskDate text-muted">${element['start']} - ${element['end']}</span> | ${element['title']}
                                 </button>
                                 <a href="#" class="d-flex deleteButton" data-toggle="modal" data-target="#confirmation-modal" type="button">
                                     <span class="icon-copy dw dw-delete-3 row align-self-center"></span>

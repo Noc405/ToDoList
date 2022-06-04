@@ -31,5 +31,5 @@
     }
 
     $result = ["success" => $success, "message" => $msg];
-    print_r($result);
+    echo json_encode($result);
 ?>
