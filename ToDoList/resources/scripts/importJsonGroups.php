@@ -18,7 +18,12 @@
     
         $newJsonArray = json_encode($jsonArray);
     
-        file_put_contents('/ToDoList/ToDoList/data/group.json', $newJsonArray);
+        try {
+            file_put_contents("../../data/group.json", $newJsonArray);
+        } catch (\Throwable $th) {
+            $success = 0;
+            $msg = "fichier introuvable";
+        }
     
     }else{
         $success = 0;

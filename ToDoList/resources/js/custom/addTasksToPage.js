@@ -44,16 +44,19 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
     //Filter tasks from gorups
     let tasksFiltred = new Array();
     let tabindex = 0;
+    let numberTasksFinish = 0;
     for (let ii = 0; ii < tasks.length; ii++) {
         if(tasks[ii]['group'] == groupName){
             if(tasks[ii]['finish'] == false){
                 tasksFiltred[tabindex] = tasks[ii]
                 tabindex += 1;
+            } else {
+                numberTasksFinish += 1;
             }
         }
     }
 
-    if(tasksFiltred.length > 0){
+    if(numberTasksFinish > 0 || tasksFiltred.length > 0){
         let contentPage = document.querySelector('.contentPage');
         let contentGroup = document.querySelector('.contentTask');
         //Delete all the elements in the div
@@ -93,6 +96,7 @@ $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
         });
 
         contentPage.innerHTML += `
+        <p class="mt-3"><a class="linkFinishTasks" href="#"><i class="fa fa-angle-down" aria-hidden="true"></i> Terminées : ${numberTasksFinish}</a></p>
         <button type="button" class="btn btn-success mt-3" id="finishTasks">Terminer les tâches cochées</button>
         <button type="button" id="btnAddTask" class="btn btn-info addTask">
             <div class="crossHorizontal"></div>

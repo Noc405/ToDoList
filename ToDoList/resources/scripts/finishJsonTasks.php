@@ -23,12 +23,12 @@
     $newJsonArray = json_encode($jsonArray);
     
     try {
-        file_put_contents(`/ToDoList/ToDoList/data/tasks.json`, $newJsonArray);
+        file_put_contents("../../data/tasks.json", $newJsonArray);
     } catch (\Throwable $th) {
         $success = 0;
         $msg = "fichier introuvable";
     }
 
-    $result = ["success" => $success, "message" => $msg, "data" => $jsonArray];
-    print_r($result);
+    $result = ["success" => $success, "message" => $msg];
+    echo json_encode($result);
 ?>

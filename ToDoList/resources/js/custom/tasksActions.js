@@ -30,7 +30,11 @@ window.addEventListener('load', () => {
 
             xhr.onreadystatechange = function () {
                 if(this.readyState == 4 && this.status == 200){
-                    console.log(this.response);
+                    let htmlLink = document.querySelector('.linkFinishTasks').innerHTML;
+                    let htmlLinkSeparated = htmlLink.split(" : ");
+                    let newTerminateTasks = parseInt(htmlLinkSeparated[1]) + taskId.length;
+
+                    document.querySelector('.linkFinishTasks').innerHTML = `Terminées : ${newTerminateTasks}`;
                 }else if(this.readyState == 4){
                     alert("Erreur lors de la requête : HTTP ERROR " + this.status);
                 }
@@ -70,7 +74,7 @@ $(document).ready(function(){
                     //Hide the form
                     $("#add-task-modal").modal('hide');
 
-                    //Reload
+                    // Reload
                     window.location.reload();
                 }else{
                     let error = document.querySelector('.alertMessage');
@@ -79,7 +83,7 @@ $(document).ready(function(){
                 }
             }else if(this.readyState == 4){
                 console.log(this.response);
-                alert("Erreur lors de la requête : HTTP ERROR " + this.status)
+                alert("Erreur lors de la requête : HTTP ERROR " + this.status);
             }
         }
         

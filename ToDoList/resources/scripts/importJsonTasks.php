@@ -71,13 +71,18 @@
     
         $values['start'] = $ordredDate['start'];
         $values['end'] = $ordredDate['end'];
+        $values['finish'] = false;
     
         array_push($jsonArray, $values);
     
         $newJsonArray = json_encode($jsonArray);
     
-        file_put_contents(`/ToDoList/ToDoList/data/tasks.json`, $newJsonArray);
-    
+        try {
+            file_put_contents("../../data/tasks.json", $newJsonArray);
+        } catch (\Throwable $th) {
+            $success = 0;
+            $msg = "fichier introuvable";
+        }    
     }else{
         $success = 0;
         $msg = "veuillez remplir correctement les champs";
