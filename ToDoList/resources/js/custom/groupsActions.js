@@ -3,45 +3,75 @@ window.addEventListener('load', () => {
     $('#btnAddGroup').click(function () {
         $('#add-group-modal').modal();
     });
-});
 
-$(document).ready(function(){
-	$("#add-group").submit(function(e){
-        //Don't refresh the page
-        e.preventDefault();
-
-        var data = new FormData(this)
-        //Transfert data to php
-        var xhr = new XMLHttpRequest();
-        
-        xhr.onreadystatechange = function () {
-            if(this.readyState == 4 && this.status == 200){
-                //Get the result and set it to json
-                var jsonResult = this.response;
-                console.log(jsonResult)
-                var result = JSON.parse(jsonResult);
-                //reload the page if the result is 1
-                if(result.success == 1){
-                    //Hide the form
-                    $("#add-group-modal").modal('hide');
-
-                    //Reload
-                    window.location.reload();
-                }else{
-                    let error = document.querySelector('.alertMessage');
-                    error.classList.add('show');
-                    error.innerHTML = result.message;
+    //Add a group
+    $(document).ready(function(){
+        $("#add-group").submit(function(e){
+            //Don't refresh the page
+            e.preventDefault();
+    
+            var data = new FormData(this)
+            //Transfert data to php
+            var xhr = new XMLHttpRequest();
+            
+            xhr.onreadystatechange = function () {
+                if(this.readyState == 4 && this.status == 200){
+                    //Get the result and set it to json
+                    var jsonResult = this.response;
+                    var result = JSON.parse(jsonResult);
+                    //reload the page if the result is 1
+                    if(result.success == 1){
+                        //Hide the form
+                        $("#add-group-modal").modal('hide');
+    
+                        //Reload
+                        window.location.reload(); // Here, I want to not reload the page and reload the elements from the json file
+                    }else{
+                        let error = document.querySelector('.alertMessage');
+                        error.classList.add('show');
+                        error.innerHTML = result.message;
+                    }
+                }else if(this.readyState == 4){
+                    alert("erreur lors de l'execution de la requête");
                 }
-            }else if(this.readyState == 4){
-                console.log(this.response);
-                alert("erreur lors de l'execution de la requête");
             }
-        }
-        
-        xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/importJsonGroups.php", true);
-        // responseType = 'json';
-        xhr.send(data);
+            
+            xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/importJsonGroups.php", true);
+            responseType = 'json';
+            xhr.send(data);
+    
+            return false;
+        });
+    });
 
-        return false;
-	});
+    //Delete the group
+    $('.deleteButtonGroup').click(function(){
+        let header = $(this).parent();
+        let card = header.parent();
+        let deleteGroupId = card.attr('id');
+
+        //if the form is submit (user confirm delete), remove the task
+        $("#confirmation-modal").submit(function(e){
+            //Don't refresh the page
+            e.preventDefault();
+
+            //Transfert data to php
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if(this.readyState == 4 && this.status == 200){
+                    // Reload the page
+                    // LaodTaskPage();
+                    window.location.reload();
+                }else if(this.readyState == 4){
+                    alert("Erreur lors de la requête : HTTP ERROR " + this.status);
+                }
+            }
+            
+            xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/deleteJsonGroup.php", true);;
+            xhr.setRequestHeader( "Content-Type", "application/json" );
+            // responseType = 'json';
+            xhr.send(JSON.stringify(deleteGroupId));
+        });
+    });
 });

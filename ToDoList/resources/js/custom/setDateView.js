@@ -56,8 +56,6 @@ function setDateView(date) {
 
             //Set the end date
             let separetedEndDate = endDate[0].split("-");
-            console.log(separetedStartDate)
-            console.log(separetedEndDate)
 
             if(separetedStartDate[2] != separetedEndDate[2] || separetedStartDate[1] != separetedEndDate[1] || separetedStartDate[0] != separetedEndDate[0]){
                 //Hour start date
@@ -66,7 +64,6 @@ function setDateView(date) {
 
                 //set the second date
                 newDate[i] += " - ";
-                console.log(newDate[i])
                 newDate[i] += separetedEndDate[2];
                 //Set the month
                 switch (separetedEndDate[1]) {

@@ -71,7 +71,6 @@ function LaodTaskPage() {
             //Show the elements
             tasksFiltred.forEach((element, i) => {
                 let date = setDateView(tasksFiltred);
-                console.log("Date : " + date[i])
                 contentGroup.innerHTML += `
                 <div class="card" id="${element['id']}">
                     <div class="card-header d-flex">
@@ -177,7 +176,6 @@ function AddEventOnTasks() {
             $('.taskBody').html(tasksFiltred[ii].description);
             $('.taskDateInfo').html(date);
             $('#task-info').modal();
-            console.log('click')
         });
     });
     // Show the informations of the finished task

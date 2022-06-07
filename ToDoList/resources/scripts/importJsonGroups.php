@@ -11,6 +11,7 @@
         $values = array();
 
         //Set the values for the json file
+        $values ['id'] = count($jsonArray) + 1;
         $values ['name'] = $_POST['name'];
         $values ['color'] = $_POST['color'];
     

@@ -61,7 +61,13 @@
     left: -5px;
 }
 
-
+.deleteButtonGroup{
+    position: relative;
+    right: 50px;
+    top: 0px;
+    width: auto;
+    height: auto;
+}
 
 .alertMessage{
     display: none;

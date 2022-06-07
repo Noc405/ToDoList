@@ -10,7 +10,7 @@
     // Converts to an array 
     $jsonArray = json_decode($JsonFile, true);
 
-    //Set the finish for the tasks finished
+    //Delete the task deleted from the array
     for ($i=0; $i < count($jsonArray); $i++) { 
         if($jsonArray[$i]['id'] == $data){
             unset($jsonArray[$i]);
@@ -35,6 +35,6 @@
         $msg = "fichier introuvable";
     }
 
-    $result = ["success" => $success, "message" => $msg, "json" => $jsonOrdred, "newJson" => $newJsonArray];
-    print_r($result);
+    $result = ["success" => $success, "message" => $msg];
+    echo json_encode($result);
 ?>
