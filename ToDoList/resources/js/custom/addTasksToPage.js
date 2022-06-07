@@ -1,5 +1,5 @@
 var tasksFiltred = new Array();
-let tasksFinish = new Array();
+var tasksFinish = new Array();
 
 function LaodTaskPage() {
     $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
@@ -69,7 +69,9 @@ function LaodTaskPage() {
             let contentGroup = document.querySelector('.contentTask');
 
             //Show the elements
-            tasksFiltred.forEach(element => {
+            tasksFiltred.forEach((element, i) => {
+                let date = setDateView(tasksFiltred);
+                console.log("Date : " + date[i])
                 contentGroup.innerHTML += `
                 <div class="card" id="${element['id']}">
                     <div class="card-header d-flex">
@@ -79,7 +81,7 @@ function LaodTaskPage() {
                             </div>
                         </div>
                         <button href="#" class="btn btn-block text-left taskName">
-                            <span class="taskDate text-muted">${element['start']} - ${element['end']}</span> | ${element.title}
+                            <span class="taskDate text-muted">${date[i]}</span> | ${element.title}
                         </button>
                         <a href="#" class="d-flex deleteButton" data-toggle="modal" data-target="#confirmation-modal" type="button">
                             <span class="icon-copy dw dw-delete-3 row align-self-center"></span>
@@ -101,7 +103,8 @@ function LaodTaskPage() {
                 </div>
             `;
 
-            tasksFinish.forEach(element => {
+            tasksFinish.forEach((element, i) => {
+                let date = setDateView(tasksFinish);
                 contentPage.innerHTML += `
                 <div id="terminedTasks" class="collapse" data-parent="#accordion">
                     <div class="terminadedTasksContent">
@@ -113,7 +116,7 @@ function LaodTaskPage() {
                                     </div>
                                 </div>
                                 <button href="#" class="btn btn-block text-left taskFinishName">
-                                <span class="taskDate text-muted">${element['start']} - ${element['end']}</span> | ${element['title']}
+                                <span class="taskDate text-muted">${date[i]}</span> | ${element['title']}
                                 </button>
                                 <a href="#" class="d-flex deleteButton" data-toggle="modal" data-target="#confirmation-modal" type="button">
                                     <span class="icon-copy dw dw-delete-3 row align-self-center"></span>
@@ -167,20 +170,24 @@ LaodTaskPage();
 function AddEventOnTasks() {
     // Show the informations of the tasks
     document.querySelectorAll('.taskName').forEach((task, ii) => {
+        let date = setDateView(tasksFiltred)
         task.addEventListener('click', () =>{        
             $('.taskIcon').html("<i class='fa fa-"+tasksFiltred[ii].icon+"'></i>");
             $('.taskTitle').html(tasksFiltred[ii].title);
             $('.taskBody').html(tasksFiltred[ii].description);
+            $('.taskDateInfo').html(date);
             $('#task-info').modal();
             console.log('click')
         });
     });
     // Show the informations of the finished task
     document.querySelectorAll('.taskFinishName').forEach((task, ii) => {
+        let date = setDateView(tasksFinish)
         task.addEventListener('click', () =>{        
             $('.taskIcon').html("<i class='fa fa-"+tasksFinish[ii].icon+"'></i>");
             $('.taskTitle').html(tasksFinish[ii].title);
             $('.taskBody').html(tasksFinish[ii].description);
+            $('.taskDateInfo').html(date);
             $('#task-info').modal();
         });
     });

@@ -5,7 +5,7 @@ var calender = {
 	businessHours: false,
 	defaultView: 'month',
 	// event dragging & resizing
-	editable: true,
+	editable: false,
 	// header
 	header: {
 		left: 'title',
