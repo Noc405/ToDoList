@@ -1,4 +1,5 @@
 <div class="main-container">
+    <!-- Navigation menu -->
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">Groupes</li>
@@ -7,6 +8,7 @@
 
     <!-- Groupe -->
     <div id="contentPage align-item-left">
+        <!-- This is the content group, where i show the elements -->
         <div class="contentGroup">
         </div>
         <button type="button" id="btnAddGroup" class="btn btn-info addTask">
@@ -20,16 +22,16 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body text-center font-18">
-                    <h4 class="padding-top-30 mb-30 weight-500">Are you sure you want to continue?</h4>
+                    <h4 class="padding-top-30 mb-30 weight-500">Voulez-vous vraiment supprimer ce groupe ?</h4>
                     <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
                         <form method="post" class="d-flex w-100 justify-content-around">
                             <div class="col-6">
                                 <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
-                                NO
+                                NON
                             </div>
                             <div class="col-6">
                                 <button type="submit" class="btn btn-primary border-radius-100 btn-block confirmation-btn"><i class="fa fa-check"></i></button>
-                                YES
+                                OUI
                             </div>
                         </form>
                     </div>
@@ -43,6 +45,7 @@
     <div id="add-group-modal" class="modal modal-top fade calendar-modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+                <!-- This is the form #add-group -->
                 <form id="add-group" method="post">
                     <div class="modal-body">
                         <h4 class="text-blue h4 mb-10">Ajouter un groupe</h4>
@@ -60,14 +63,45 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Sauvgarder</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <!-- End modal add Group -->
+
+    <!-- Modal Edit Group -->
+    <div id="edit-group-modal" class="modal modal-top fade calendar-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- This is the form #add-group -->
+                <form id="edit-group" method="post">
+                    <div class="modal-body">
+                        <h4 class="text-blue h4 mb-10">Modifier un groupe</h4>
+                        <div class="alert alert-danger alertMessageEdit" role="alert">
+                        </div>
+                        <div class="form-group">
+                            <label>Nom du groupe</label>
+                            <input type="text" class="form-control groupName" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Couleur
+                            </label>
+                            <input type="text" class="complex-colorpicker form-control groupColor" value="#7ab2fa" name="color"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End modal edit Group -->
 
 	<script src='/ToDoList/ToDoList/resources/js/custom/addGroupToPage.js'></script>
 	<script src='/ToDoList/ToDoList/resources/js/custom/groupsActions.js'></script>

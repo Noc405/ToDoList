@@ -25,7 +25,7 @@ window.addEventListener('load', () => {
                         $("#add-group-modal").modal('hide');
     
                         //Reload
-                        window.location.reload(); // Here, I want to not reload the page and reload the elements from the json file
+                        window.location.reload();
                     }else{
                         let error = document.querySelector('.alertMessage');
                         error.classList.add('show');
@@ -72,6 +72,70 @@ window.addEventListener('load', () => {
             xhr.setRequestHeader( "Content-Type", "application/json" );
             // responseType = 'json';
             xhr.send(JSON.stringify(deleteGroupId));
+        });
+    });
+    
+    //Edit the group
+    $('.EditButtonGroup').click(function(){
+        let header = $(this).parent();
+        let card = header.parent();
+        let editGroupId = card.attr('id');
+
+            //Transfert data to php
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if(this.readyState == 4 && this.status == 200){
+                    var jsonResult = this.response;
+                    var result = JSON.parse(jsonResult);
+                    //Set the value
+                    $('.groupName').attr('value',result.group.name);
+                    $('.groupColor').attr('value',result.group.color);
+                }else if(this.readyState == 4){
+                    alert("Erreur lors de la requête : HTTP ERROR " + this.status);
+                }
+            }
+            
+            xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/setEditJsonGroup.php", true);;
+            xhr.setRequestHeader( "Content-Type", "application/json" );
+            responseType = 'json';
+            xhr.send(JSON.stringify(editGroupId));
+
+        //if the form is submit (user confirm delete), remove the task
+        $("#edit-group").submit(function(e){
+            //Don't refresh the page
+            e.preventDefault();
+
+            var data = new FormData(this)
+
+            //Transfert data to php
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if(this.readyState == 4 && this.status == 200){
+                    //Get the result and set it to json
+                    var jsonResult = this.response;
+                    var result = JSON.parse(jsonResult);
+                    //reload the page if the result is 1
+                    if(result.success == 1){
+                        // Reload
+                        window.location.reload();
+                    }else{
+                        let error = document.querySelector('.alertMessageEdit');
+                        error.classList.add('show');
+                        error.innerHTML = result.message
+                    }
+                }else if(this.readyState == 4){
+                    alert("Erreur lors de la requête : HTTP ERROR " + this.status);
+                }
+            }
+            
+            xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/editJsonGroup.php", true);
+
+            data.append("groupId", editGroupId);
+
+            responseType = 'json';
+            xhr.send(data);
         });
     });
 });

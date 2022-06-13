@@ -26,7 +26,7 @@
                 </div>
                 <div class="modal-footer d-flex justify-content-around">
                     <div class="taskDate">
-                        <a href="index.php?controller=home&action=home" class="taskDateInfo">02 juin 2022</a>
+                        <a href="index.php?controller=home&action=home" class="taskDateInfo"></a>
                     </div>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
@@ -40,16 +40,16 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-body text-center font-18">
-                    <h4 class="padding-top-30 mb-30 weight-500">Are you sure you want to continue?</h4>
+                    <h4 class="padding-top-30 mb-30 weight-500">Voulez-vous vraiment supprimer cette tâche ?</h4>
                     <div class="padding-bottom-30 row" style="max-width: 170px; margin: 0 auto;">
                         <form method="post" class="d-flex w-100 justify-content-around">
                             <div class="col-6">
                                 <button type="button" class="btn btn-secondary border-radius-100 btn-block confirmation-btn" data-dismiss="modal"><i class="fa fa-times"></i></button>
-                                NO
+                                NON
                             </div>
                             <div class="col-6">
                                 <button type="submit" class="btn btn-primary border-radius-100 btn-block confirmation-btn"><i class="fa fa-check"></i></button>
-                                YES
+                                OUI
                             </div>
                         </form>
                     </div>
@@ -104,14 +104,68 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Sauvgarder</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <!-- End modal add tasks -->
+
+    <!-- Modal Edit task -->
+    <div id="edit-task-modal" class="modal modal-top fade calendar-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="edit-task" method="post">
+                    <div class="modal-body">
+                        <h4 class="text-blue h4 mb-10">Modifier une tâche</h4>
+                        <div class="alert alert-danger alertMessageEdit" role="alert">
+                        </div>
+                        <div class="form-group">
+                            <label>Nom de la tâche</label>
+                            <input type="text" class="form-control taskName" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input class="form-control datetimepicker-range taskDate" placeholder="Select Dates" type="text" name="date">
+                        </div>
+                        <div class="form-group">
+                            <label>Heure de début</label>
+                            <input type='text' class="form-control time-picker-default hourStart" name="starthour">
+                        </div>
+                        <div class="form-group">
+                            <label>Heure de fin</label>
+                            <input type='text' class="form-control time-picker-default hourEnd" name="endhour">
+                        </div>
+                        <div class="form-group d-flex w-100 justify-content-between">
+                            <label class="align-items-center h-auto">Toute la journée</label>
+                            <input type='checkbox' id="allDay" class="form-control w-25 taskAllDay" name="allDay">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="form-control taskDesc" name="desc"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Icone de la tâche</label>
+                            <select class="form-control taskIcon" name="icon">
+                                <option value="circle">Rond</option>
+                                <option value="cog">Roue</option>
+                                <option value="group">Groupe</option>
+                                <option value="suitcase">Valise</option>
+                                <option value="calendar">Calendrier</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End modal edit tasks -->
 
 	<script src='/ToDoList/ToDoList/resources/js/custom/addTasksToPage.js'></script>
 	<script src='/ToDoList/ToDoList/resources/js/custom/tasksActions.js'></script>

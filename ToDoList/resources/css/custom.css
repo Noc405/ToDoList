@@ -68,8 +68,26 @@
     width: auto;
     height: auto;
 }
+.EditButtonGroup{
+    position: relative;
+    right: 100px;
+    top: 0px;
+    width: auto;
+    height: auto;
+}
+.EditButtonTask{
+    position: relative;
+    right: 50px;
+    top: 0px;
+    width: auto;
+    height: auto;
+}
+
 
 .alertMessage{
+    display: none;
+}
+.alertMessageEdit{
     display: none;
 }
 .show{

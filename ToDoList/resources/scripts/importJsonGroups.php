@@ -8,22 +8,27 @@
         // Converts to an array 
         $jsonArray = json_decode($JsonFile, true);
 
-        $values = array();
-
-        //Set the values for the json file
-        $values ['id'] = count($jsonArray) + 1;
-        $values ['name'] = $_POST['name'];
-        $values ['color'] = $_POST['color'];
+        if(preg_match('/^([a-z]|[A-Z]|[0-9])+$/', $_POST['name'])){
+            $values = array();
     
-        array_push($jsonArray, $values);
-    
-        $newJsonArray = json_encode($jsonArray);
-    
-        try {
-            file_put_contents("../../data/group.json", $newJsonArray);
-        } catch (\Throwable $th) {
+            //Set the values for the json file
+            $values ['id'] = count($jsonArray) + 1;
+            $values ['name'] = htmlspecialchars($_POST['name']);
+            $values ['color'] = htmlspecialchars($_POST['color']);
+        
+            array_push($jsonArray, $values);
+        
+            $newJsonArray = json_encode($jsonArray);
+        
+            try {
+                file_put_contents("../../data/group.json", $newJsonArray);
+            } catch (\Throwable $th) {
+                $success = 0;
+                $msg = "fichier introuvable";
+            }
+        }else{
             $success = 0;
-            $msg = "fichier introuvable";
+            $msg = "veuillez remplir correctement les champs (pas de caractères spécieaux)";
         }
     
     }else{

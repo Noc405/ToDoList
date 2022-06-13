@@ -109,7 +109,6 @@ window.addEventListener('load', () => {
                     error.innerHTML = result.message
                 }
             }else if(this.readyState == 4){
-                console.log(this.response);
                 alert("Erreur lors de la requête : HTTP ERROR " + this.status);
             }
         }
@@ -154,6 +153,86 @@ window.addEventListener('load', () => {
             xhr.setRequestHeader( "Content-Type", "application/json" );
             responseType = 'json';
             xhr.send(JSON.stringify(deleteTaskId));
+        });
+    });
+
+    //Edit the task
+    $('.EditButtonTask').click(function(){
+        let header = $(this).parent();
+        let card = header.parent();
+        let editTaskId = card.attr('id');
+
+            //Transfert data to php
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if(this.readyState == 4 && this.status == 200){
+                    var jsonResult = this.response;
+                    var result = JSON.parse(jsonResult);
+                    //Set the value
+                    if(result.task.allDay == true){
+                        $('.taskAllDay').attr('checked', "");
+                    }else{
+                        $('.taskAllDay').removeAttr('checked');
+                    }
+                    // $('.taskDate').attr('value',"");
+                    // $('.hourStart').attr('value',"");
+                    // $('.hourEnd').attr('value',"");
+
+                    $('.taskName').attr('value',result.task.title);
+                    $('.taskDesc').html(result.task.description);
+
+                    document.querySelectorAll('.taskIcon option').forEach(element => {                        
+                        if(element.getAttribute('value') == result.task.icon){
+                            element.setAttribute('selected', "");
+                        }
+                    });
+                }else if(this.readyState == 4){
+                    alert("Erreur lors de la requête : HTTP ERROR " + this.status);
+                }
+            }
+            
+            xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/setEditJsonTask.php", true);;
+            xhr.setRequestHeader( "Content-Type", "application/json" );
+            responseType = 'json';
+            xhr.send(JSON.stringify(editTaskId));
+
+        //if the form is submit (user confirm delete), remove the task
+        $("#edit-task").submit(function(e){
+            //Don't refresh the page
+            e.preventDefault();
+
+            var data = new FormData(this)
+
+            //Transfert data to php
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+                if(this.readyState == 4 && this.status == 200){
+                    //Get the result and set it to json
+                    var jsonResult = this.response;
+                    var result = JSON.parse(jsonResult);
+                    //reload the page if the result is 1
+                    if(result.success == 1){
+                        // Reload
+                        // window.location.reload();
+                        console.log(result)
+                    }else{
+                        let error = document.querySelector('.alertMessageEdit');
+                        error.classList.add('show');
+                        error.innerHTML = result.message
+                    }
+                }else if(this.readyState == 4){
+                    alert("Erreur lors de la requête : HTTP ERROR " + this.status);
+                }
+            }
+            
+            xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/editJsonTask.php", true);
+
+            data.append("taskId", editTaskId);
+
+            responseType = 'json';
+            xhr.send(data);
         });
     });
 })

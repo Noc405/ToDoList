@@ -85,6 +85,9 @@ function LaodTaskPage() {
                         <a href="#" class="d-flex deleteButton" data-toggle="modal" data-target="#confirmation-modal" type="button">
                             <span class="icon-copy dw dw-delete-3 row align-self-center"></span>
                         </a>
+                        <a href="#" class="d-flex EditButtonTask" data-toggle="modal" data-target="#edit-task-modal" type="button">
+                            <span class="icon-copy dw dw-edit-2 row align-self-center"></span>
+                        </a>
                     </div>
                 </div>
                 `;
@@ -174,7 +177,7 @@ function AddEventOnTasks() {
             $('.taskIcon').html("<i class='fa fa-"+tasksFiltred[ii].icon+"'></i>");
             $('.taskTitle').html(tasksFiltred[ii].title);
             $('.taskBody').html(tasksFiltred[ii].description);
-            $('.taskDateInfo').html(date);
+            $('.taskDateInfo').html(date[ii]);
             $('#task-info').modal();
         });
     });
@@ -185,7 +188,7 @@ function AddEventOnTasks() {
             $('.taskIcon').html("<i class='fa fa-"+tasksFinish[ii].icon+"'></i>");
             $('.taskTitle').html(tasksFinish[ii].title);
             $('.taskBody').html(tasksFinish[ii].description);
-            $('.taskDateInfo').html(date);
+            $('.taskDateInfo').html(date[ii]);
             $('#task-info').modal();
         });
     });

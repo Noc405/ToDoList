@@ -60,7 +60,6 @@ function setDateView(date) {
             if(separetedStartDate[2] != separetedEndDate[2] || separetedStartDate[1] != separetedEndDate[1] || separetedStartDate[0] != separetedEndDate[0]){
                 //Hour start date
                 newDate[i] += ` à ${startDate[1]}`;
-                newDate[i] += startDate[1];
 
                 //set the second date
                 newDate[i] += " - ";

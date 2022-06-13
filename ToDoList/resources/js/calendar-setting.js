@@ -14,6 +14,15 @@ var calender = {
 	},
 	events:[],
 	eventClick: function(event, jsEvent, view) {
+		if(event.finish == true){
+			$('.taskFinish').removeClass("text-danger");
+			$('.taskFinish').addClass("text-success");
+			$('.taskFinish').html("Términée");
+		}else{
+			$('.taskFinish').removeClass("text-success");
+			$('.taskFinish').addClass("text-danger");
+			$('.taskFinish').html("Non términée");
+		}
 		$('.event-icon').html("<i class='fa fa-"+event.icon+"'></i>");
 		$('.event-title').html(event.title);
 		$('.event-body').html(event.description);
