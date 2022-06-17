@@ -2,7 +2,24 @@ var tasksFiltred = new Array();
 var tasksFinish = new Array();
 
 function LaodTaskPage() {
+    var contentPage = document.querySelector('.contentPage');
+    contentPage.innerHTML = "";
+    //Delete all the elements in the div
+    contentPage.innerHTML += `<div class="contentTask"></div>`;
+
+    var contentGroup = document.querySelector('.contentTask');
+    contentGroup.innerHTML = `
+    <div class="d-flex w-100 justify-content-around">
+        <div class="text-center">
+            <p>Il n'y a pas de tâches dans ce groupe</p>
+        </div>
+    </div>
+    `;
+
     $.get("../../../ToDoList/ToDoList/data/tasks.json", function(data) {
+        var contentGroup = document.querySelector('.contentTask');
+        contentGroup.innerHTML = "";
+
         let tasks = new Array(data.length)
 
         //Get all the tasks
@@ -61,13 +78,6 @@ function LaodTaskPage() {
         }
 
         if(numberTasksFinish > 0 || tasksFiltred.length > 0){
-            let contentPage = document.querySelector('.contentPage');
-            //Delete all the elements in the div
-            contentPage.innerHTML = "";
-            contentPage.innerHTML += `<div class="contentTask"></div>`;
-
-            let contentGroup = document.querySelector('.contentTask');
-
             //Show the elements
             tasksFiltred.forEach((element, i) => {
                 let date = setDateView(tasksFiltred);
@@ -91,7 +101,6 @@ function LaodTaskPage() {
                     </div>
                 </div>
                 `;
-
             });
 
             //Add the terminated tasks
@@ -138,10 +147,6 @@ function LaodTaskPage() {
             //Add the two buttons
             contentPage.innerHTML += `
             <button type="button" class="btn btn-success mt-3" id="finishTasks">Terminer les tâches cochées</button>
-            <button type="button" id="btnAddTask" class="btn btn-info addTask">
-                <div class="crossHorizontal"></div>
-                <div class="crossVertical"></div>
-            </button>
             `;
 
             // Add an event click on the loaded ressources
@@ -149,22 +154,24 @@ function LaodTaskPage() {
                 AddEventOnTasks();
             })
         }else{
-            let contentGroup = document.querySelector('.contentTask');
-
+            var contentGroup = document.querySelector('.contentTask');
             contentGroup.innerHTML = `
             <div class="d-flex w-100 justify-content-around">
                 <div class="text-center">
                     <p>Il n'y a pas de tâches dans ce groupe</p>
                 </div>
             </div>
-            <button type="button" id="btnAddTask" class="btn btn-info addTask">
-                <div class="crossHorizontal"></div>
-                <div class="crossVertical"></div>
-            </button>
             `;
         }
-
     });
+    
+    //Add the two buttons
+    contentPage.innerHTML += `
+    <button type="button" id="btnAddTask" class="btn btn-info addTask">
+        <div class="crossHorizontal"></div>
+        <div class="crossVertical"></div>
+    </button>
+    `;
 };
 
 LaodTaskPage();

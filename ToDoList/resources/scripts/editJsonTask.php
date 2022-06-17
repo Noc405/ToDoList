@@ -2,7 +2,7 @@
     $success = 1;
     $msg = "Le fichier a été mis a jour";
     
-    if(isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['date']) && !empty($_POST['date'])){
+    if(isset($_POST['name']) && !empty($_POST['name'])){
         //Get the value from the json file of the tasks
         $JsonFile = file_get_contents("../../data/tasks.json");
         // Converts to an array 
@@ -13,75 +13,13 @@
         $values ['title'] = $_POST['name'];
         $values ['description'] = $_POST['desc'];
         $values ['icon'] = $_POST['icon'];
-        $values ['group'] = $_POST['group'];
-
-        //If the user don't set the hour
-        if(isset($_POST['allDay'])){
-            $values['allDay'] = true;
-
-            //Set the date at the good format
-            $date = $_POST['date'];
-            $separatedDates = explode(" - ", $date);
-
-            if(count($separatedDates) > 1){
-                //Set the start date
-                $daysMonthYearsStart = explode("/", $separatedDates[0]);
-                $ordredDate['start'] = $daysMonthYearsStart[2]."-".$daysMonthYearsStart[0]."-".$daysMonthYearsStart[1];
-                //Set the end date
-                $daysMonthYearsEnd = explode("/", $separatedDates[1]);
-                $ordredDate['end'] = $daysMonthYearsEnd[2]."-".$daysMonthYearsEnd[0]."-".$daysMonthYearsEnd[1];
-            }else{
-                //Set the start date
-                $daysMonthYears = explode("/", $separatedDates[0]);
-                $ordredDate['start'] = $daysMonthYears[2]."-".$daysMonthYears[0]."-".$daysMonthYears[1];
-                //Set the end date
-                $ordredDate['end'] = $ordredDate['start'];
-            }
-        }else{
-            //set the date as the good format
-            $values['allDay'] = false;
-            
-            //Set the date at the good format
-            $date = $_POST['date'];
-            $separatedDates = explode(" - ", $date);
-
-            if(count($separatedDates) == 2){
-                //Set the hour
-                $startHour = setHour($_POST['starthour']);
-                $endHour = setHour($_POST['endhour']);
-                //Set the start date
-                $daysMonthYearsStart = explode("/", $separatedDates[0]);
-                $ordredDate['start'] = $daysMonthYearsStart[2]."-".$daysMonthYearsStart[0]."-".$daysMonthYearsStart[1]."T".$startHour;
-                //Set the end date
-                $daysMonthYearsEnd = explode("/", $separatedDates[1]);
-                $ordredDate['end'] = $daysMonthYearsEnd[2]."-".$daysMonthYearsEnd[0]."-".$daysMonthYearsEnd[1]."T".$endHour;
-            }else if(count($separatedDates) == 1){
-                //Set the hour
-                $startHour = setHour($_POST['starthour']);
-                $endHour = setHour($_POST['endhour']);
-                //Set the start date
-                $daysMonthYears = explode("/", $separatedDates[0]);
-                $ordredDate['start'] = $daysMonthYears[2]."-".$daysMonthYears[0]."-".$daysMonthYears[1]."T".$startHour;
-                //Set the end date
-                $ordredDate['end'] = $daysMonthYears[2]."-".$daysMonthYears[0]."-".$daysMonthYears[1]."T".$endHour;
-            }
-        }
-    
-        $values['start'] = $ordredDate['start'];
-        $values['end'] = $ordredDate['end'];
-        $values['finish'] = false;
 
         //Edit the group 
         for ($i=0; $i < count($jsonArray); $i++) { 
             if($jsonArray[$i]['id'] == $_POST['taskId']){
                 $jsonArray[$i]['title'] = $values['title'];
                 $jsonArray[$i]['description'] = $values['description'];
-                $jsonArray[$i]['icon'] = $values['titiconle'];
-                $jsonArray[$i]['group'] = $values['gorup'];
-                $jsonArray[$i]['allDay'] = $values['allDay'];
-                $jsonArray[$i]['start'] = $values['start'];
-                $jsonArray[$i]['end'] = $values['end'];
-                $jsonArray[$i]['finish'] = $values['finish'];
+                $jsonArray[$i]['icon'] = $values['icon'];
             }
         }
     
@@ -98,7 +36,7 @@
         $msg = "veuillez remplir correctement les champs";
     }
 
-    $result = ["success" => $success, "message" => $msg];
+    $result = ["success" => $success, "message" => $msg, "post" => $_POST];
     echo json_encode($result);
 
     //Set the hour correctly

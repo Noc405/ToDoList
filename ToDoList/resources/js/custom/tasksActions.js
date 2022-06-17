@@ -92,6 +92,7 @@ window.addEventListener('load', () => {
         var xhr = new XMLHttpRequest();
         
         xhr.onreadystatechange = function () {
+            console.log(this.response)
             if(this.readyState == 4 && this.status == 200){
                 //Get the result and set it to json
                 var jsonResult = this.response;
@@ -160,7 +161,7 @@ window.addEventListener('load', () => {
     $('.EditButtonTask').click(function(){
         let header = $(this).parent();
         let card = header.parent();
-        let editTaskId = card.attr('id');
+        var editTaskId = card.attr('id');
 
             //Transfert data to php
             var xhr = new XMLHttpRequest();
@@ -169,20 +170,12 @@ window.addEventListener('load', () => {
                 if(this.readyState == 4 && this.status == 200){
                     var jsonResult = this.response;
                     var result = JSON.parse(jsonResult);
-                    //Set the value
-                    if(result.task.allDay == true){
-                        $('.taskAllDay').attr('checked', "");
-                    }else{
-                        $('.taskAllDay').removeAttr('checked');
-                    }
-                    // $('.taskDate').attr('value',"");
-                    // $('.hourStart').attr('value',"");
-                    // $('.hourEnd').attr('value',"");
+                    //Set the value of the modal edit
 
                     $('.taskName').attr('value',result.task.title);
                     $('.taskDesc').html(result.task.description);
 
-                    document.querySelectorAll('.taskIcon option').forEach(element => {                        
+                    document.querySelectorAll('.iconOfTheTask option').forEach(element => {                        
                         if(element.getAttribute('value') == result.task.icon){
                             element.setAttribute('selected', "");
                         }
@@ -208,15 +201,17 @@ window.addEventListener('load', () => {
             var xhr = new XMLHttpRequest();
 
             xhr.onreadystatechange = function () {
+                console.log(this.response)
                 if(this.readyState == 4 && this.status == 200){
                     //Get the result and set it to json
                     var jsonResult = this.response;
                     var result = JSON.parse(jsonResult);
                     //reload the page if the result is 1
+                    console.log(result)
                     if(result.success == 1){
+                        $('#edit-task-modal').hide();
                         // Reload
-                        // window.location.reload();
-                        console.log(result)
+                        window.location.reload();
                     }else{
                         let error = document.querySelector('.alertMessageEdit');
                         error.classList.add('show');
@@ -228,7 +223,6 @@ window.addEventListener('load', () => {
             }
             
             xhr.open("POST", "/ToDoList/ToDoList/resources/scripts/editJsonTask.php", true);
-
             data.append("taskId", editTaskId);
 
             responseType = 'json';

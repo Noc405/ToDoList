@@ -23,9 +23,8 @@ window.addEventListener('load', () => {
                     if(result.success == 1){
                         //Hide the form
                         $("#add-group-modal").modal('hide');
-    
                         //Reload
-                        window.location.reload();
+                        loadGroups();
                     }else{
                         let error = document.querySelector('.alertMessage');
                         error.classList.add('show');
@@ -60,9 +59,9 @@ window.addEventListener('load', () => {
 
             xhr.onreadystatechange = function () {
                 if(this.readyState == 4 && this.status == 200){
+                    $("#confirmation-modal").modal('hide');
                     // Reload the page
-                    // LaodTaskPage();
-                    window.location.reload();
+                    loadGroups();
                 }else if(this.readyState == 4){
                     alert("Erreur lors de la requête : HTTP ERROR " + this.status);
                 }
@@ -118,8 +117,9 @@ window.addEventListener('load', () => {
                     var result = JSON.parse(jsonResult);
                     //reload the page if the result is 1
                     if(result.success == 1){
+                        $("#edit-group-modal").modal('hide');
                         // Reload
-                        window.location.reload();
+                        loadGroups();
                     }else{
                         let error = document.querySelector('.alertMessageEdit');
                         error.classList.add('show');

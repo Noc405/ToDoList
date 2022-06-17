@@ -11,11 +11,15 @@
         $values = array();
 
         //Set the values for the json file
-        $values ['id'] = count($jsonArray) + 1;
-        $values ['title'] = $_POST['name'];
-        $values ['description'] = $_POST['desc'];
-        $values ['icon'] = $_POST['icon'];
-        $values ['group'] = $_POST['group'];
+        if(!empty($jsonArray)){
+            $values['id'] = count($jsonArray) + 1;
+        }else{
+            $values['id'] = 1;
+        }
+        $values['title'] = $_POST['name'];
+        $values['description'] = $_POST['desc'];
+        $values['icon'] = $_POST['icon'];
+        $values['group'] = $_POST['group'];
 
         //If the user don't set the hour
         if(isset($_POST['allDay'])){
@@ -73,9 +77,14 @@
         $values['end'] = $ordredDate['end'];
         $values['finish'] = false;
     
-        array_push($jsonArray, $values);
+        if(!empty($jsonArray)){
+            array_push($jsonArray, $values);
+            $newJsonArray = json_encode($jsonArray);
+        }else{
+            $jsonArray = $values;
+            $newJsonArray = "[" . json_encode($jsonArray) . "]";
+        }
     
-        $newJsonArray = json_encode($jsonArray);
     
         try {
             file_put_contents("../../data/tasks.json", $newJsonArray);
